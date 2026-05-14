@@ -19,6 +19,11 @@ Just visit the live link at the top of this README — no installation needed.
 > The link above contains a video demonstration of the system in action.
 
 ---
+---
+## Softcopy of Documentation
+
+> The softcopy is uploaded at my repository. file name "AustriaMarcCedrickBSCS-3B"
+---
 
 ## 🖥️ How to Use
 
