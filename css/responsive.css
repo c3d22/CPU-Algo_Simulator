@@ -1,0 +1,92 @@
+/*
+* responsive.css
+* ─────────────────────────────────────────────
+* Breakpoints for split-screen and small-window
+* use cases.
+*
+* Breakpoints:
+*   ≤ 900px  → narrow split-screen / tablet
+*   ≤ 600px  → stacked single-column / mobile
+*/
+
+/* ── Narrow split-screen (e.g. 50% of 1080p or tablet landscape) ── */
+@media (max-width: 900px) {
+
+:root {
+  --sidebar-w: 240px; /* shrink sidebar to save space */
+}
+
+/* Reduce sidebar padding */
+.config {
+  padding: 14px 12px;
+  gap: 10px;
+}
+
+/* Smaller logo */
+.logo h1 { font-size: 11px; letter-spacing: 2px; }
+.logo .sub { font-size: 9px; }
+
+/* Tighter cards */
+.card { padding: 10px; }
+
+/* Reduce font sizes slightly */
+select,
+input[type="number"] {
+  font-size: 12px;
+  padding: 8px 10px;
+}
+
+/* Gantt blocks shrink */
+.gantt-block {
+  font-size: 11px;
+  min-width: 38px;
+  padding: 6px 3px 16px;
+}
+
+/* Stats table font */
+.stats-table { font-size: 13px; }
+.stats-table th { font-size: 10px; padding: 9px 10px; }
+.stats-table td { padding: 9px 10px; }
+
+/* Output padding */
+.output { padding: 20px 18px; gap: 18px; }
+}
+
+/* ── Stacked single-column (very narrow: mobile or tiny split) ── */
+@media (max-width: 600px) {
+
+/* Stack sidebar above output */
+.general {
+  flex-direction: column;
+  height: auto;
+  overflow: visible;
+}
+
+/* Sidebar becomes full-width header */
+.config {
+  width: 100%;
+  min-width: unset;
+  height: auto;
+  max-height: 55vh;   /* cap so output is still visible */
+  border-right: none;
+  border-bottom: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+/* Output becomes full-width scrollable below */
+.output {
+  height: auto;
+  min-height: 50vh;
+  padding: 16px;
+}
+
+/* Allow body to scroll vertically */
+body { overflow-y: auto; }
+
+/* Avg cards stack nicely */
+.avg-card { min-width: 80px; }
+
+/* Process rows tighter */
+.pid-label { font-size: 10px; padding: 6px 0; }
+.process-row input[type="number"] { font-size: 11px; padding: 5px 4px; }
+}

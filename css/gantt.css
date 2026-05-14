@@ -1,0 +1,88 @@
+/*
+* gantt.css
+* ─────────────────────────────────────────────
+* Gantt chart container and individual blocks.
+* Idle blocks (CPU gaps) get a distinct dashed
+* style to stand out from process blocks.
+*/
+
+/* ── Outer wrapper (hidden until first run) ── */
+.gantt-wrap { display: none; }
+.gantt-wrap.visible { display: block; }
+
+/* ── Horizontal scroll wrapper ── */
+.gantt-scroll {
+overflow-x: auto;
+scrollbar-width: thin;
+scrollbar-color: var(--muted) transparent;
+}
+.gantt-scroll::-webkit-scrollbar       { height: 4px; }
+.gantt-scroll::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 4px; }
+
+/* ── Chart flex row ── */
+.gantt-chart {
+display: flex;
+align-items: stretch;
+min-height: 58px;
+border-radius: 8px;
+overflow: hidden;
+border: 1px solid var(--border);
+width: max-content;
+min-width: 100%;
+}
+
+/* ── Individual process block ── */
+.gantt-block {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+font-family: var(--mono);
+font-size: 12px;
+font-weight: 700;
+min-width: 48px;
+padding: 8px 4px 18px; /* bottom padding reserves space for timestamp */
+border-right: 1px solid rgba(0,0,0,0.25);
+color: #0d1f1c;        /* dark text on coloured background */
+position: relative;
+transition: filter 0.15s;
+}
+.gantt-block:hover { filter: brightness(1.15); }
+
+/* Last child is the final end-time label, not a real block */
+.gantt-block:last-child {
+border-right: none;
+min-width: auto;
+padding: 0 8px;
+background: transparent !important;
+color: var(--label);
+font-size: 11px;
+font-weight: 400;
+justify-content: flex-end;
+align-items: flex-end;
+padding-bottom: 4px;
+}
+
+/* Start-time stamp shown at bottom-left of each block */
+.gtime {
+font-size: 9px;
+opacity: 0.65;
+position: absolute;
+bottom: 3px;
+left: 4px;
+}
+
+/* ── Idle / CPU gap block ── */
+/*
+* Rendered when no process is ready to run.
+* e.g. all arrivals > 0 leaves a gap at the start.
+*/
+.gantt-idle {
+background: rgba(255,255,255,0.04) !important;
+border: 1px dashed var(--border);
+color: var(--label) !important;
+font-style: italic;
+font-size: 10px !important;
+font-weight: 400 !important;
+letter-spacing: 1px;
+}

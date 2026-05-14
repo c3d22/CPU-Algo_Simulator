@@ -1,0 +1,93 @@
+/*
+* stats.css
+* ─────────────────────────────────────────────
+* Process statistics table and average metric
+* cards shown after each algorithm run.
+*/
+
+/* ── Stats wrapper (hidden until first run) ── */
+#statsWrap { display: none; }
+
+/* Horizontal scroll for narrow screens */
+.table-scroll {
+overflow-x: auto;
+scrollbar-width: thin;
+scrollbar-color: var(--muted) transparent;
+}
+.table-scroll::-webkit-scrollbar       { height: 4px; }
+.table-scroll::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 4px; }
+
+/* ── Statistics table ── */
+.stats-table {
+width: 100%;
+border-collapse: collapse;
+font-family: var(--mono);
+font-size: 15px;
+min-width: 420px; /* prevents squishing on very narrow views */
+}
+
+/* Column headers */
+.stats-table th {
+text-align: left;
+padding: 11px 16px;
+font-size: 11px;
+letter-spacing: 2px;
+color: var(--label);
+text-transform: uppercase;
+border-bottom: 1px solid var(--border);
+white-space: nowrap;
+}
+
+/* Data cells */
+.stats-table td {
+padding: 11px 16px;
+border-bottom: 1px solid rgba(42,80,69,0.35);
+white-space: nowrap;
+}
+.stats-table tr:last-child td { border-bottom: none; }
+.stats-table tr:hover td      { background: rgba(61,220,151,0.04); }
+
+/* PID column — coloured per process */
+.stats-table .pid-col { font-weight: 700; }
+
+/*
+* Priority column — only visible for priority-based algorithms.
+* Toggled by renderer.js → renderStats()
+*/
+.col-priority { display: none; }
+
+/* ── Average metric cards ── */
+.avg-row {
+display: none;
+gap: 12px;
+flex-wrap: wrap;
+}
+.avg-row.visible { display: flex; }
+
+.avg-card {
+flex: 1;
+min-width: 100px;
+background: var(--card);
+border: 1px solid var(--border);
+border-radius: 10px;
+padding: 10px 14px;
+text-align: center;
+}
+
+/* Metric label */
+.av-label {
+font-family: var(--mono);
+font-size: 8px;
+letter-spacing: 2px;
+color: var(--label);
+text-transform: uppercase;
+margin-bottom: 5px;
+}
+
+/* Metric value */
+.av-value {
+font-family: var(--mono);
+font-size: 18px;
+color: var(--accent);
+font-weight: 700;
+}

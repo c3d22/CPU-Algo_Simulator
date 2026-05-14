@@ -1,0 +1,106 @@
+/*
+* layout.css
+* ─────────────────────────────────────────────
+* Two-column flex layout:
+*   .general  → flex container (full viewport)
+*   .config   → fixed-width left sidebar
+*   .output   → scrollable right panel
+*/
+
+/* ── Wrapper ── */
+.general {
+display: flex;
+height: 100vh;
+overflow: hidden;
+}
+
+/* ── Left sidebar (config panel) ── */
+.config {
+width: var(--sidebar-w);
+min-width: var(--sidebar-w);
+height: 100vh;
+background: var(--panel);
+border-right: 1px solid var(--border);
+display: flex;
+flex-direction: column;
+padding: 20px 16px;
+gap: 14px;
+overflow: hidden; /* inner .inputFields scrolls instead */
+}
+
+/* App logo / title block */
+.logo {
+text-align: center;
+padding-bottom: 12px;
+border-bottom: 1px solid var(--border);
+flex-shrink: 0;
+}
+.logo h1 {
+font-family: var(--mono);
+font-size: 13px;
+letter-spacing: 3px;
+color: var(--accent);
+text-transform: uppercase;
+font-weight: 700;
+}
+.logo .sub {
+font-size: 10px;
+color: var(--label);
+letter-spacing: 2px;
+margin-top: 3px;
+}
+
+/* ── Right output panel ── */
+.output {
+flex: 1;
+height: 100vh;
+overflow-y: auto;
+padding: 28px 30px;
+display: flex;
+flex-direction: column;
+gap: 24px;
+scrollbar-width: thin;
+scrollbar-color: var(--muted) transparent;
+}
+.output::-webkit-scrollbar       { width: 5px; }
+.output::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 4px; }
+
+/* Output panel header */
+.output-title {
+font-family: var(--mono);
+font-size: 11px;
+letter-spacing: 3px;
+color: var(--accent);
+text-transform: uppercase;
+border-bottom: 1px solid var(--border);
+padding-bottom: 10px;
+flex-shrink: 0;
+}
+
+/* Section sub-labels (Gantt Chart, Process Statistics) */
+.section-label {
+font-family: var(--mono);
+font-size: 10px;
+letter-spacing: 2px;
+color: var(--label);
+text-transform: uppercase;
+margin-bottom: 10px;
+}
+
+/* Empty state shown before any calculation */
+.empty-state {
+flex: 1;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 10px;
+opacity: 0.3;
+font-family: var(--mono);
+}
+.empty-state .icon { font-size: 42px; }
+.empty-state p {
+font-size: 11px;
+letter-spacing: 2px;
+text-transform: uppercase;
+}

@@ -1,0 +1,52 @@
+/*
+* base.css
+* ─────────────────────────────────────────────
+* Global reset, CSS custom properties (design
+* tokens), and font imports.
+* Everything else inherits from these variables.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap');
+
+/* ── Hard reset ── */
+*, *::before, *::after {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/* ── Design tokens ── */
+:root {
+/* Backgrounds */
+--bg:      #0d1f1c;
+--panel:   #132927;
+--card:    #1a3530;
+
+/* Accent palette */
+--accent:  #3ddc97;
+--accent2: #20b07a;
+--muted:   #408A71;
+
+/* Text */
+--text:    #d4f5e9;
+--label:   #8fbfaf;
+
+/* Borders */
+--border:  #2a5045;
+
+/* Typography */
+--mono: 'Fira Code', monospace;       /* labels, headings, code-like text */
+--sans: 'JetBrains Mono', monospace;  /* body / general UI text           */
+
+/* Sidebar width (used in layout.css + responsive.css) */
+--sidebar-w: 300px;
+}
+
+/* ── Base body ── */
+body {
+font-family: var(--sans);
+background: var(--bg);
+color: var(--text);
+min-height: 100vh;
+overflow-x: hidden;
+}

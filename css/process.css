@@ -1,0 +1,98 @@
+/*
+* process.css
+* ─────────────────────────────────────────────
+* Styles for the dynamically generated process
+* input table: scroll container, header row,
+* individual process rows, PID badge, and the
+* optional Time Quantum input for Round Robin.
+*/
+
+/* ── Scrollable container for process rows ── */
+.inputFields {
+flex: 1;
+overflow-y: auto;
+scrollbar-width: thin;
+scrollbar-color: var(--muted) transparent;
+padding-right: 2px;
+min-height: 0; /* allow flex shrink inside column */
+}
+.inputFields::-webkit-scrollbar       { width: 4px; }
+.inputFields::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 4px; }
+
+/* ── Table wrapper ── */
+.process-table {
+display: none;
+flex-direction: column;
+}
+.process-table.visible { display: flex; }
+
+/* ── Column header row ── */
+.table-header {
+display: grid;
+/* default: PID | Arrival | Burst */
+grid-template-columns: 44px 1fr 1fr;
+gap: 6px;
+padding: 6px 4px;
+font-family: var(--mono);
+font-size: 9px;
+letter-spacing: 1.5px;
+color: var(--label);
+text-transform: uppercase;
+border-bottom: 1px solid var(--border);
+margin-bottom: 4px;
+}
+
+/* ── Individual process row ── */
+.process-row {
+display: grid;
+grid-template-columns: 44px 1fr 1fr; /* overridden inline for priority */
+gap: 5px;
+align-items: center;
+padding: 4px 2px;
+border-radius: 6px;
+transition: background 0.15s;
+animation: rowIn 0.22s ease both;
+}
+.process-row:hover { background: rgba(61,220,151,0.05); }
+
+/* Staggered slide-in animation per row */
+@keyframes rowIn {
+from { opacity: 0; transform: translateX(-8px); }
+to   { opacity: 1; transform: translateX(0); }
+}
+
+/* PID badge (e.g. "P1") */
+.pid-label {
+font-family: var(--mono);
+font-size: 11px;
+color: var(--accent);
+text-align: center;
+background: rgba(61,220,151,0.1);
+border-radius: 4px;
+padding: 8px 0;
+border: 1px solid rgba(61,220,151,0.2);
+}
+
+/* Compact number inputs inside each row */
+.process-row input[type="number"] {
+padding: 7px 6px;
+font-size: 12px;
+text-align: center;
+}
+
+/* ── Time Quantum section (Round Robin / Priority+RR) ── */
+.tq-section {
+margin-top: 10px;
+padding-top: 10px;
+border-top: 1px dashed var(--border);
+animation: rowIn 0.25s ease both;
+}
+.tq-section label {
+font-family: var(--mono);
+font-size: 10px;
+letter-spacing: 2px;
+color: var(--accent);
+text-transform: uppercase;
+display: block;
+margin-bottom: 6px;
+}

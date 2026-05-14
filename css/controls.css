@@ -1,0 +1,101 @@
+/*
+* controls.css
+* ─────────────────────────────────────────────
+* Styles for all interactive form controls:
+* cards, selects, number inputs, confirm button,
+* calculate button, and priority mode toggle.
+*/
+
+/* ── Card wrapper ── */
+.card {
+background: var(--card);
+border: 1px solid var(--border);
+border-radius: 10px;
+padding: 12px;
+flex-shrink: 0;
+}
+
+/* Card field label */
+.card label {
+display: block;
+font-size: 10px;
+letter-spacing: 2px;
+color: var(--label);
+text-transform: uppercase;
+margin-bottom: 6px;
+font-family: var(--mono);
+}
+
+/* ── Shared input / select styles ── */
+select,
+input[type="number"] {
+width: 100%;
+padding: 10px 12px;
+font-family: var(--mono);
+font-size: 13px;
+background: var(--bg);
+border: 1px solid var(--border);
+border-radius: 7px;
+color: var(--text);
+outline: none;
+transition: border-color 0.2s;
+appearance: none;
+}
+select:focus,
+input[type="number"]:focus {
+border-color: var(--accent);
+}
+
+/* ── Priority mode sub-dropdown ── */
+/* Hidden by default; toggled via JS when Priority algo is selected */
+.priority-mode-wrap {
+display: none;
+margin-top: 8px;
+}
+.priority-mode-wrap[aria-hidden="false"] {
+display: block;
+}
+.priority-mode-wrap label {
+color: var(--accent) !important; /* distinguish from regular labels */
+}
+
+/* ── Confirm button ── */
+#confirmButton {
+width: 100%;
+margin-top: 10px;
+padding: 10px;
+font-family: var(--mono);
+font-size: 12px;
+letter-spacing: 2px;
+background: var(--accent2);
+color: #0d1f1c;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-weight: 700;
+transition: background 0.2s, transform 0.1s;
+text-transform: uppercase;
+}
+#confirmButton:hover  { background: var(--accent); transform: translateY(-1px); }
+#confirmButton:active { transform: translateY(0); }
+
+/* ── Calculate button ── */
+/* Hidden until processes are confirmed via generateInputs() */
+.calc-btn {
+width: 100%;
+padding: 11px;
+font-family: var(--mono);
+font-size: 13px;
+letter-spacing: 2px;
+background: transparent;
+color: var(--accent);
+border: 1px solid var(--accent);
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.2s;
+text-transform: uppercase;
+display: none;
+flex-shrink: 0;
+}
+.calc-btn.visible { display: block; }
+.calc-btn:hover   { background: var(--accent); color: #0d1f1c; }

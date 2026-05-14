@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPU Scheduling Simulator</title>
+
+  <!-- ─── Stylesheets (modular CSS) ─── -->
+  <link rel="stylesheet" href="css/base.css">       <!-- reset, variables, fonts     -->
+  <link rel="stylesheet" href="css/layout.css">     <!-- sidebar + output panel      -->
+  <link rel="stylesheet" href="css/controls.css">   <!-- form inputs, buttons, cards -->
+  <link rel="stylesheet" href="css/process.css">    <!-- process input table rows    -->
+  <link rel="stylesheet" href="css/gantt.css">      <!-- gantt chart + idle blocks   -->
+  <link rel="stylesheet" href="css/stats.css">      <!-- results table + avg cards   -->
+  <link rel="stylesheet" href="css/responsive.css"> <!-- breakpoints / split-screen  -->
+</head>
+<body>
+
+<div class="general">
+
+  <!-- ════════════════════════════════════
+       LEFT PANEL — Configuration
+  ════════════════════════════════════ -->
+  <aside class="config">
+
+    <!-- App title -->
+    <div class="logo">
+      <h1>CPU SCHEDULER</h1>
+      <div class="sub">Algorithm Simulator</div>
+    </div>
+
+    <!-- Algorithm selection card -->
+    <div class="card">
+      <label for="algorithm">Algorithm</label>
+      <select id="algorithm">
+        <option value="fcfs">FCFS — First Come First Serve</option>
+        <option value="sjf">SJF — Shortest Job First</option>
+        <option value="srt">SRT — Shortest Remaining Time</option>
+        <option value="round_robin">Round Robin</option>
+        <option value="priority">Priority Scheduling</option>
+        <option value="priority_rr">Priority + Round Robin</option>
+      </select>
+
+      <!--
+        Priority mode sub-dropdown.
+        Shown only when "Priority Scheduling" is selected.
+        Toggled by ui.js → handleAlgoChange()
+      -->
+      <div id="priorityModeWrap" class="priority-mode-wrap" aria-hidden="true">
+        <label for="priorityMode">Priority Mode</label>
+        <select id="priorityMode">
+          <option value="non_preemptive">Non-Preemptive</option>
+          <option value="preemptive">Preemptive</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Number of processes card -->
+    <div class="card">
+      <label for="numOfInputs">Number of Processes</label>
+      <input type="number" id="numOfInputs" min="1" max="20" placeholder="e.g. 4">
+      <button id="confirmButton">CONFIRM</button>
+    </div>
+
+    <!--
+      Dynamically generated process rows (arrival, burst, optional priority).
+      Populated by ui.js → generateInputs()
+    -->
+    <div class="inputFields" id="inputFields"></div>
+
+    <!-- Calculate button — hidden until processes are confirmed -->
+    <button class="calc-btn" id="calcBtn">&#9654; CALCULATE</button>
+
+  </aside>
+
+  <!-- ════════════════════════════════════
+       RIGHT PANEL — Output
+  ════════════════════════════════════ -->
+  <main class="output" id="outputPanel">
+    <div class="output-title">// OUTPUT</div>
+
+    <!-- Shown before first calculation -->
+    <div class="empty-state" id="emptyState">
+      <div class="icon">&#11041;</div>
+      <p>Awaiting process data</p>
+    </div>
+
+    <!-- Gantt chart — hidden until first run -->
+    <div class="gantt-wrap" id="ganttWrap">
+      <div class="section-label">// Gantt Chart</div>
+      <div class="gantt-scroll">
+        <div class="gantt-chart" id="ganttChart"></div>
+      </div>
+    </div>
+
+    <!-- Process statistics table — hidden until first run -->
+    <div id="statsWrap">
+      <div class="section-label">// Process Statistics</div>
+      <div class="table-scroll">
+        <table class="stats-table" id="statsTable">
+          <thead>
+            <tr>
+              <th>Process</th>
+              <th>Arrival</th>
+              <th>Burst</th>
+              <!-- Priority column shown only for priority-based algorithms -->
+              <th class="col-priority">Priority</th>
+              <th>Finish</th>
+              <th>Turnaround</th>
+              <th>Waiting</th>
+            </tr>
+          </thead>
+          <tbody id="statsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Average metrics — hidden until first run -->
+    <div class="avg-row" id="avgRow">
+      <div class="avg-card">
+        <div class="av-label">Avg Turnaround Time</div>
+        <div class="av-value" id="avgTAT">—</div>
+      </div>
+      <div class="avg-card">
+        <div class="av-label">Avg Waiting Time</div>
+        <div class="av-value" id="avgWT">—</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ─── JavaScript modules (load order matters) ───
+     Algorithms are self-contained; main.js ties everything together.
+-->
+<script src="js/algorithms/fcfs.js"></script>
+<script src="js/algorithms/sjf.js"></script>
+<script src="js/algorithms/srt.js"></script>
+<script src="js/algorithms/roundRobin.js"></script>
+<script src="js/algorithms/priority.js"></script>
+<script src="js/algorithms/priorityRR.js"></script>
+<script src="js/utils/helpers.js"></script>
+<script src="js/utils/renderer.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
